@@ -51,6 +51,9 @@ import Text from './text.js'
 import TileEngine from './tileEngine.js'
 import Vector from './vector.js'
 
+// import modularSprite from './modularSprite.js'
+import modObject from './modObject.js';
+
 let kontra = {
   Animation,
 
@@ -118,7 +121,10 @@ let kontra = {
 
   Text,
   TileEngine,
-  Vector
+  Vector,
+
+  // modularSprite,
+  // modObject
 };
 
 export default kontra

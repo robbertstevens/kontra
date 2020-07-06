@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/straker/kontra",
   "devDependencies": {
-    "@rollup/stream": "^0.1.0",
+    "@rollup/stream": "^1.0.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.3",
     "glob": "^7.1.6",
@@ -62,7 +62,7 @@
     "marked": "^0.7.0",
     "mocha": "^8.0.1",
     "preprocess": "github:straker/preprocess",
-    "rollup": "^1.6.0",
+    "rollup": "^2.19.0",
     "sinon": "^7.2.7",
     "typescript": "^3.7.2",
     "vinyl-source-stream": "^2.0.0"

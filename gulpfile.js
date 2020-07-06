@@ -100,7 +100,7 @@ gulp.task('build', gulp.series(buildIife, buildModule, 'build:docs', 'build:ts')
 gulp.task('dist', gulp.series(distIife, distModule));
 
 gulp.task('watch', function() {
-  gulp.watch('src/*.js', gulp.series('build', 'dist'));
+  gulp.watch('src/**/*.js', gulp.series('build', 'dist'));
 });
 
 gulp.task('default', gulp.series('build', 'watch'));

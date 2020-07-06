@@ -55,43 +55,55 @@
   <script>
     let { canvas, context } = kontra.init();
 
-    let sprite = kontra.Sprite({
+    window.test = kontra.modObject({
       x: 100,
       y: 100,
-      opacity: 1,
-      width: 100,
-      height: 100,
-      color: 'red'
-    });
-
-    let child = kontra.Sprite({
-      x: 100,
-      y: 100,
-      opacity: 0.75,
-      width: 100,
-      height: 100,
-      color: 'blue'
-    });
-
-    let child2 = kontra.Sprite({
-      x: 100,
-      y: 100,
-      opacity: 0.75,
-      width: 100,
-      height: 100,
-      color: 'yellow'
-    });
-
-    sprite.addChild(child);
-    child.addChild(child2);
-
-    let loop = kontra.GameLoop({
-      update() {},
+      width: 30,
+      height: 30,
+      color: 'red',
       render() {
-        sprite.render();
+        this.context.fillStyle = this.color;
+        this.context.fillRect(0, 0, this.width, this.height);
       }
     });
-    loop.start();
+
+    // let sprite = kontra.Sprite({
+    //   x: 100,
+    //   y: 100,
+    //   opacity: 1,
+    //   width: 100,
+    //   height: 100,
+    //   color: 'red'
+    // });
+
+    // let child = kontra.Sprite({
+    //   x: 100,
+    //   y: 100,
+    //   opacity: 0.75,
+    //   width: 100,
+    //   height: 100,
+    //   color: 'blue'
+    // });
+
+    // let child2 = kontra.Sprite({
+    //   x: 100,
+    //   y: 100,
+    //   opacity: 0.75,
+    //   width: 100,
+    //   height: 100,
+    //   color: 'yellow'
+    // });
+
+    // sprite.addChild(child);
+    // child.addChild(child2);
+
+    // let loop = kontra.GameLoop({
+    //   update() {},
+    //   render() {
+    //     sprite.render();
+    //   }
+    // });
+    // loop.start();
   </script>
 </body>
 </html>
