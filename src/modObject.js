@@ -1,4 +1,3 @@
-import { Factory } from './utils.js'
 import accelerationMod from './mods/acceleration.js'
 import anchorMod from './mods/anchor.js'
 import cameraMod from './mods/camera.js'
@@ -9,30 +8,33 @@ import renderMod from './mods/render.js'
 import rotationMod from './mods/rotation.js'
 import scaleMod from './mods/scale.js'
 import ttlMod from './mods/ttl.js'
+import updateMod from './mods/update.js'
 import velocityMod from './mods/velocity.js'
 
-class GameObject {
+class ModObject {
   constructor(properties) {
     return this.init(properties);
   }
 
   init(properties = {}) {
     [
+      // @ifdef GAMEOBJECT_GROUP
+      // group mod needs to go first in order to setup children
+      // for all other mods
+      groupMod,
+      // @endif
+
       // --------------------------------------------------
       // defaults
       // --------------------------------------------------
 
       rectMod,
       renderMod,
+      updateMod,
 
       // --------------------------------------------------
       // optionals
       // --------------------------------------------------
-
-      // @ifdef GAMEOBJECT_GROUP
-      // groupMod must be first to override others
-      groupMod,
-      // @endif
 
       // @ifdef GAMEOBJECT_ACCELERATION
       accelerationMod,
@@ -67,42 +69,39 @@ class GameObject {
       // @endif
     ].map(mod => {
       let { i, ...props } = Object.getOwnPropertyDescriptors(mod);
+      Object.defineProperties(this, props);
       i && i.value.call(this);
-      for (let prop in props) {
-        if (!Object.hasOwnProperty(prop)) {
-          Object.defineProperty(this, prop, props[prop]);
-        }
-      }
     });
 
-    let { render, ...props } = properties;
+    let {
+      render,
+
+      // @ifdef GAMEOBJECT_GROUP
+      children = [],
+      // @endif
+
+      // @ifdef GAMEOBJECT_SCALE
+      scale = this.scale,
+      // @endif
+
+      ...props
+    } = properties;
     Object.assign(this, props);
+
+    // @ifdef GAMEOBJECT_GROUP
+    children.map(child => this.addChild(child));
+    // @endif
+
+    // @ifdef GAMEOBJECT_SCALE
+    this.setScale(scale.x, scale.y);
+    // @endif
 
     this._rf = render || this.draw;
   }
-
-  draw() {}
-
-  update(dt) {
-    // @ifdef GAMEOBJECT_VELOCITY||GAMEOBJECT_ACCELERATION||GAMEOBJECT_TTL
-    this.advance(dt);
-    // @endif
-  }
-
-  advance(dt) {
-    // @ifdef GAMEOBJECT_VELOCITY
-
-    // @ifdef GAMEOBJECT_ACCELERATION
-    this.velocity = this.velocity.add(this.acceleration, dt);
-    // @endif
-
-    this.position = this.position.add(this.velocity, dt);
-    // @endif
-
-    // @ifdef GAMEOBJECT_TTL
-    this.ttl--;
-    // @endif
-  }
 }
 
-export default Factory(GameObject)
+export default function modObjectFactory() {
+  return new ModObject(...arguments);
+}
+modObjectFactory.prototype = ModObject.prototype;
+modObjectFactory.class = ModObject;

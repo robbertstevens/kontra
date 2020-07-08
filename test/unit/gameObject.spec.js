@@ -1,6 +1,8 @@
-import GameObject from '../../src/gameObject.js'
+import ModObject from '../../src/modObject.js'
 import { getContext } from '../../src/core.js'
 import { noop } from '../../src/utils.js'
+
+let GameObject = ModObject
 
 let testGameObject = GameObject();
 
@@ -31,7 +33,7 @@ let properties = {
 // --------------------------------------------------
 // gameObject
 // --------------------------------------------------
-describe('gameObject with properties: ' + JSON.stringify(properties,null,4), () => {
+describe.only('gameObject with properties: ' + JSON.stringify(properties,null,4), () => {
 
   // --------------------------------------------------
   // init
@@ -394,10 +396,10 @@ describe('gameObject with properties: ' + JSON.stringify(properties,null,4), () 
         expect(gameObject.context.translate.secondCall.calledWith(-100, -50)).to.be.true;
 
         gameObject.context.translate.resetHistory();
-        gameObject.scale = {x: 1, y: 1};
+        gameObject.scale = {x: 1.5, y: 1.5};
         gameObject.render();
 
-        expect(gameObject.context.translate.secondCall.calledWith(-50, -25)).to.be.true;
+        expect(gameObject.context.translate.secondCall.calledWith(-75, -37.5)).to.be.true;
 
         gameObject.context.translate.restore();
       });
@@ -421,17 +423,11 @@ describe('gameObject with properties: ' + JSON.stringify(properties,null,4), () 
         expect(gameObject.context.scale.calledWith(2, 2)).to.be.true;
 
         gameObject.context.scale.resetHistory();
-        gameObject.scale = {x: 1, y: 1};
-        gameObject.render();
-
-        expect(gameObject.context.scale.calledWith(1, 1)).to.be.true;
-
-        gameObject.context.scale.restore();
       });
 
-      it('should not scale if scale.x and scale.y are 0', () => {
+      it('should not scale if scale.x and scale.y are 1', () => {
         let gameObject = GameObject({
-          scale: {x: 0, y: 0}
+          scale: {x: 1, y: 1}
         });
 
         sinon.stub(gameObject.context, 'scale').callsFake(noop);

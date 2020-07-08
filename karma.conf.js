@@ -16,7 +16,7 @@ module.exports = function(config) {
       {pattern: 'test/audio/*.*', included: false, served: true },
       {pattern: 'test/data/*.*', included: false, served: true },
 
-      {pattern: 'src/*.js', type: 'module', included: false },
+      {pattern: 'src/**/*.js', type: 'module', included: false },
       {pattern: 'test/unit/*.spec.js', type: 'module' },
       {pattern: 'test/integration/*.spec.js', type: 'module' },
     ],

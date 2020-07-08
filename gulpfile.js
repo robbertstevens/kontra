@@ -104,3 +104,21 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', gulp.series('build', 'watch'));
+
+gulp.task('size', () => {
+  return gulp.src('test-rollup-*.js')
+    // .pipe(preprocess({
+    //   context: {
+    //     GAMEOBJECT_ANCHOR: true
+    //   }
+    // }))
+    .pipe(terser())
+    .pipe(gulp.dest('.'))
+    .pipe(size({
+      showFiles: true
+    }))
+    .pipe(size({
+      showFiles: true,
+      gzip: true
+    }));
+});

@@ -43,25 +43,25 @@ export default {
 
     // @ifdef GAMEOBJECT_SCALE
     if ('scale' in this) {
-      let scaleX = this.scale.x;
-      let scaleY = this.scale.y;
+      let { x, y } = this.scale;
 
       // it's faster to only scale if one of the values is non-zero
       // rather than always scaling
       // @see https://jsperf.com/scale-or-if-statement/4
-      if (scaleX != 1 || scaleY != 1) {
-        context.scale(scaleX, scaleY);
+      if (x != 1 || y != 1) {
+        context.scale(x, y);
       }
     }
     // @endif
 
     // @ifdef GAMEOBJECT_ANCHOR
     if ('anchor' in this) {
-      let x = -this.width * this.anchor.x;
-      let y = -this.height * this.anchor.y;
+      let { x, y } = this.anchor;
+      let anchorX = -this.width * x;
+      let anchorY = -this.height * y;
 
-      if (x || y) {
-        context.translate(x, y);
+      if (anchorX || anchorY) {
+        context.translate(anchorX, anchorY);
       }
     }
     // @endif
@@ -74,5 +74,12 @@ export default {
 
     this._rf();
     context.restore();
-  }
+
+    // @ifdef GAMEOBJECT_GROUP
+    // perform all transforms on the parent before rendering the children
+    this.children.map(child => child.render && child.render());
+    // @endif
+  },
+
+  draw() {}
 };

@@ -1,5 +1,5 @@
 import GameObject from './gameObject.js'
-import { Factory, srOnlyStyle } from './utils.js'
+import { srOnlyStyle } from './utils.js'
 import { getCanvas } from './core.js'
 
 /**
@@ -162,4 +162,8 @@ class Scene extends GameObject.class {
   onHide() {}
 }
 
-export default Factory(Scene);
+export default function SceneFactory() {
+  return new Scene(...arguments);
+}
+SceneFactory.prototype = Scene.prototype;
+SceneFactory.class = Scene;

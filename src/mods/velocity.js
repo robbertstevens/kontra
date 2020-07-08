@@ -1,5 +1,6 @@
 import Vector from '../vector.js'
 
+// @ifdef GAMEOBJECT_VELOCITY
 export default {
   i() {
     this.velocity = Vector();
@@ -21,3 +22,4 @@ export default {
     this.velocity.y = value;
   }
 };
+// @endif

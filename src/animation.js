@@ -1,5 +1,4 @@
 import { getContext } from './core.js'
-import { Factory } from './utils.js'
 
 /**
  * An object for drawing sprite sheet animations.
@@ -166,4 +165,8 @@ class Animation {
   }
 }
 
-export default Factory(Animation)
+export default function animationFactory() {
+  return new Animation(...arguments);
+}
+animationFactory.prototype = Animation.prototype;
+animationFactory.class = Animation;

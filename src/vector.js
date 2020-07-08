@@ -1,4 +1,3 @@
-import { Factory } from './utils.js'
 import { clamp } from './helpers.js'
 
 /**
@@ -223,4 +222,8 @@ class Vector {
   // @endif
 }
 
-export default Factory(Vector)
+export default function vectorFactory() {
+  return new Vector(...arguments);
+}
+vectorFactory.prototype = Vector.prototype;
+vectorFactory.class = Vector;

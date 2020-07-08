@@ -1,7 +1,7 @@
 import Sprite from './sprite.js'
 import Text from './text.js'
 import { track } from './pointer.js'
-import { Factory, srOnlyStyle } from './utils.js'
+import { srOnlyStyle } from './utils.js'
 
 class Button extends Sprite.class {
 
@@ -201,4 +201,8 @@ class Button extends Sprite.class {
   onUp() {}
 }
 
-export default Factory(Button)
+export default function buttonFactory() {
+  return new Button(...arguments);
+}
+buttonFactory.prototype = Button.prototype;
+buttonFactory.class = Button;

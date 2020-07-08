@@ -1,6 +1,5 @@
 import { getContext } from './core.js'
 import Vector from './vector.js'
-import { Factory } from './utils.js'
 
 /**
  * The base class of most renderable classes. Handles things such as position, rotation, anchor, and the update and render life cycle.
@@ -38,7 +37,7 @@ class GameObject {
    */
 
   constructor(properties) {
-    return this.init(properties);
+    this.init(properties);
   }
 
   /**
@@ -772,4 +771,8 @@ class GameObject {
   draw() {}
 }
 
-export default Factory(GameObject)
+export default function gameObjectFactory() {
+  return new GameObject(...arguments);
+}
+gameObjectFactory.prototype = GameObject.prototype;
+gameObjectFactory.class = GameObject;
