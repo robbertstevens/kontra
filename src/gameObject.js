@@ -1,5 +1,5 @@
-import { getContext } from './core.js'
-import Vector from './vector.js'
+import { getContext } from './core.js';
+import Vector from './vector.js';
 
 /**
  * The base class of most renderable classes. Handles things such as position, rotation, anchor, and the update and render life cycle.

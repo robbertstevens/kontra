@@ -3,6 +3,7 @@ import { getContext } from '../core.js';
 export default {
   i() {
     this.context = getContext();
+    this._rf = this.draw;
   },
 
   render() {
@@ -77,7 +78,7 @@ export default {
 
     // @ifdef GAMEOBJECT_GROUP
     // perform all transforms on the parent before rendering the children
-    this.children.map(child => child.render && child.render());
+    (this.children || []).map(child => child.render && child.render());
     // @endif
   },
 

@@ -1,6 +1,6 @@
-import GameObject from './gameObject.js'
-import { srOnlyStyle } from './utils.js'
-import { getCanvas } from './core.js'
+import GameObject from './gameObject.js';
+import { srOnlyStyle } from './utils.js';
+import { getCanvas } from './core.js';
 
 /**
  * A scene object for organizing a group of objects that will update and render together.

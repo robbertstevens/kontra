@@ -1,6 +1,6 @@
-import GameObject from './gameObject.js'
-import { on } from './events.js'
-import { getCanvas, getContext } from './core.js'
+import GameObject from './gameObject.js';
+import { on } from './events.js';
+import { getCanvas, getContext } from './core.js';
 
 let fontSizeRegex = /(\d+)(\w+)/;
 

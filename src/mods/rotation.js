@@ -5,18 +5,18 @@ export default {
   },
 
   // @ifdef GAMEOBJECT_GROUP
-  get rotation() {
-    // rot = rotation
-    return this._rot;
-  },
+  // get rotation() {
+  //   // rot = rotation
+  //   return this._rot;
+  // },
 
-  set rotation(value) {
-    this.children.map(child => {
-      child.rotation += value - this._rot;
-    });
+  // set rotation(value) {
+  //   (this.children || []).map(child => {
+  //     child.rotation += value - this._rot;
+  //   });
 
-    this._rot = value;
-  }
+  //   this._rot = value;
+  // }
   // @endif
 };
 // @endif

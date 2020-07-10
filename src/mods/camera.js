@@ -12,33 +12,30 @@ export default {
     return this.y - this.sy;
   },
 
-  set viewX(value) {},
-  set viewY(value) {},
-
   // @ifdef GAMEOBJECT_GROUP
-  get sx() {
-    return this._sx;
-  },
+  // get sx() {
+  //   return this._sx;
+  // },
 
-  get sy() {
-    return this._sy;
-  },
+  // get sy() {
+  //   return this._sy;
+  // },
 
-  set sx(value) {
-    this.children.map(child => {
-      child.sx += value - this._sx;
-    });
+  // set sx(value) {
+  //   (this.children || []).map(child => {
+  //     child.sx += value - this._sx;
+  //   });
 
-    this._sx = value;
-  },
+  //   this._sx = value;
+  // },
 
-  set sy(value) {
-    this.children.map(child => {
-      child.sy += value - this._sy;
-    });
+  // set sy(value) {
+  //   (this.children || []).map(child => {
+  //     child.sy += value - this._sy;
+  //   });
 
-    this._sy = value;
-  }
+  //   this._sy = value;
+  // }
   // @endif
 };
 // @endif

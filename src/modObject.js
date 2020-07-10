@@ -1,22 +1,37 @@
-import accelerationMod from './mods/acceleration.js'
-import anchorMod from './mods/anchor.js'
-import cameraMod from './mods/camera.js'
-import groupMod from './mods/group.js'
-import opacityMod from './mods/opacity.js'
-import rectMod from './mods/rect.js'
-import renderMod from './mods/render.js'
-import rotationMod from './mods/rotation.js'
-import scaleMod from './mods/scale.js'
-import ttlMod from './mods/ttl.js'
-import updateMod from './mods/update.js'
-import velocityMod from './mods/velocity.js'
+import {
+  accelerationMod,
+  anchorMod,
+  cameraMod,
+  groupMod,
+  opacityMod,
+  rectMod,
+  renderMod,
+  rotationMod,
+  scaleMod,
+  ttlMod,
+  updateMod,
+  velocityMod
+} from './mods/index.js';
+
+let handler = {
+  set(obj, prop, value) {
+    obj._ev.map(ev => ev.call(obj, prop, value));
+    Reflect.set(obj, prop, value);
+  }
+};
 
 class ModObject {
   constructor(properties) {
-    return this.init(properties);
+    this.init(properties);
+
+    return new Proxy(this, handler);
   }
 
   init(properties = {}) {
+    this._ev = [];
+
+    let mods = properties.mods || [];
+
     [
       // @ifdef GAMEOBJECT_GROUP
       // group mod needs to go first in order to setup children
@@ -65,8 +80,10 @@ class ModObject {
       // @endif
 
       // @ifdef GAMEOBJECT_VELOCITY
-      velocityMod
+      velocityMod,
       // @endif
+
+      ...mods
     ].map(mod => {
       let { i, ...props } = Object.getOwnPropertyDescriptors(mod);
       Object.defineProperties(this, props);

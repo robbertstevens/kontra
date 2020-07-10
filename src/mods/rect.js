@@ -15,21 +15,21 @@ export default {
   },
 
   set x(value) {
-    // @ifdef GAMEOBJECT_GROUP
-    this.children.map(child => {
-      child.x += value - this.position.x;
-    });
-    // @endif
+    // // @ifdef GAMEOBJECT_GROUP
+    // (this.children || []).map(child => {
+    //   child.x += value - this.position.x;
+    // });
+    // // @endif
 
     this.position.x = value;
   },
 
   set y(value) {
-    // @ifdef GAMEOBJECT_GROUP
-    this.children.map(child => {
-      child.y += value - this.position.y;
-    });
-    // @endif
+    // // @ifdef GAMEOBJECT_GROUP
+    // (this.children || []).map(child => {
+    //   child.y += value - this.position.y;
+    // });
+    // // @endif
 
     this.position.y = value;
   }

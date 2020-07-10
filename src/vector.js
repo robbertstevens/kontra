@@ -1,4 +1,4 @@
-import { clamp } from './helpers.js'
+import { clamp } from './helpers.js';
 
 /**
  * A simple 2d vector object.

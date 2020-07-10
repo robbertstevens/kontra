@@ -33,7 +33,8 @@ let properties = {
 // --------------------------------------------------
 // gameObject
 // --------------------------------------------------
-describe.only('gameObject with properties: ' + JSON.stringify(properties,null,4), () => {
+// describe.skip('gameObject with properties: ' + JSON.stringify(properties,null,4), () => {
+describe.skip('gameObject', () => {
 
   // --------------------------------------------------
   // init
@@ -159,6 +160,21 @@ describe.only('gameObject with properties: ' + JSON.stringify(properties,null,4)
       expect(gameObject.alive).to.be.true;
     });
 
+    it('should let you pass in custom mods', () => {
+      let gameObject = GameObject({
+        mods: [{
+          i() {
+            this.foo = 'bar'
+          },
+
+          myFunc() {}
+        }]
+      });
+
+      expect(gameObject.foo).to.equal('bar');
+      expect(gameObject.myFunc).to.exist;
+    });
+
     if (hasTTL) {
       it('should have required properties for kontra.pool', () => {
         let gameObject = GameObject();
@@ -170,29 +186,31 @@ describe.only('gameObject with properties: ' + JSON.stringify(properties,null,4)
 
     if (hasGroup) {
       it('should call addChild for passed in children', () => {
-        let spy = sinon.spy(GameObject.prototype, 'addChild');
+        let spy = sinon.spy();
 
         let gameObject = GameObject({
+          mods: [{
+            addChild: spy
+          }],
           children: [GameObject(), GameObject()]
         });
 
         expect(spy.calledTwice).to.be.true;
-
-        GameObject.prototype.addChild.restore();
       });
     }
 
     if (hasScale) {
       it('should call setScale with the passed in scale', () => {
-        let spy = sinon.spy(GameObject.prototype, 'setScale');
+        let spy = sinon.spy();
 
         let gameObject = GameObject({
+          mods: [{
+            setScale: spy
+          }],
           scale: {x: 2, y: 2}
         });
 
         expect(spy.calledWith(2, 2)).to.be.true;
-
-        GameObject.prototype.setScale.restore();
       });
     }
 
@@ -375,7 +393,7 @@ describe.only('gameObject with properties: ' + JSON.stringify(properties,null,4)
     }
 
     if (hasAnchor && hasScale) {
-      it('should take into account the scaled with and height and anchor', () => {
+      it('should take into account the scaled width and height and anchor', () => {
         let gameObject = GameObject({
           x: 10,
           y: 20,

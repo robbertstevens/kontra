@@ -9,10 +9,14 @@ export default {
     // @ifdef GAMEOBJECT_VELOCITY
 
     // @ifdef GAMEOBJECT_ACCELERATION
-    this.velocity = this.velocity.add(this.acceleration, dt);
+    if (this.velocity && this.acceleration) {
+      this.velocity = this.velocity.add(this.acceleration, dt);
+    }
     // @endif
 
-    this.position = this.position.add(this.velocity, dt);
+    if (this.position && this.velocity) {
+      this.position = this.position.add(this.velocity, dt);
+    }
     // @endif
 
     // @ifdef GAMEOBJECT_TTL

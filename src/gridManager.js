@@ -1,7 +1,7 @@
-import { getCanvas } from './core.js'
-import GameObject from './gameObject.js'
-import { getRect } from './utils.js'
-import { on } from './events.js'
+import { getCanvas } from './core.js';
+import GameObject from './gameObject.js';
+import { getRect } from './utils.js';
+import { on } from './events.js';
 
 let alignment = {
   start(rtl) {

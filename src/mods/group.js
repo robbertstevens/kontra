@@ -1,7 +1,10 @@
 // @ifdef GAMEOBJECT_GROUP
+let groupProps = ['x', 'y', 'sx', 'sy', 'rotation', 'scaleX', 'scaleY'];
+
 let group = {
   i() {
     this.children = [];
+    this._ev.push(this._pc)
   },
 
   addChild(child, { absolute = false } = {}) {
@@ -38,6 +41,14 @@ let group = {
     if (index !== -1) {
       this.children.splice(index, 1);
       child.parent = null;
+    }
+  },
+
+  _pc(prop, value) {
+    if (groupProps.includes(prop)) {
+      this.children.map(child => {
+        child[prop] += value - this[prop];
+      });
     }
   }
 };

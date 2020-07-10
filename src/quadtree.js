@@ -1,5 +1,5 @@
-import { getCanvas } from './core.js'
-import { getRect } from './utils.js'
+import { getCanvas } from './core.js';
+import { getRect } from './utils.js';
 
 /**
  * Determine which subnodes the object intersects with

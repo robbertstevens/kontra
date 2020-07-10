@@ -1,4 +1,4 @@
-import Animation from './animation.js'
+import Animation from './animation.js';
 
 /**
  * Parse a string of consecutive frames.

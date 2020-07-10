@@ -14,8 +14,6 @@ export default {
     return finalOp;
   },
 
-  set finalOpacity(value) {},
-
   // @ifdef GAMEOBJECT_GROUP
   get opacity() {
     // op = opacity
@@ -25,10 +23,10 @@ export default {
   set opacity(value) {
     // final opacity value is calculated by multiplying all opacities
     // in the parent chain.
-    this._fop = this.parent && this.parent._fop ? value * this.parent._fop : value;
+    this._fop = this.parent && this.parent._fop != undefined ? value * this.parent._fop : value;
 
     // trigger a final opacity calculation of all children
-    this.children.map(child => {
+    (this.children || []).map(child => {
       child.opacity = child.opacity;
     });
 

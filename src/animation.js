@@ -1,4 +1,4 @@
-import { getContext } from './core.js'
+import { getContext } from './core.js';
 
 /**
  * An object for drawing sprite sheet animations.

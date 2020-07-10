@@ -1,7 +1,7 @@
-import Sprite from './sprite.js'
-import Text from './text.js'
-import { track } from './pointer.js'
-import { srOnlyStyle } from './utils.js'
+import Sprite from './sprite.js';
+import Text from './text.js';
+import { track } from './pointer.js';
+import { srOnlyStyle } from './utils.js';
 
 class Button extends Sprite.class {
 
